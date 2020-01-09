@@ -1,5 +1,5 @@
 # fastapi
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from starlette.middleware.cors import CORSMiddleware
 
 # Image
@@ -33,6 +33,10 @@ def get_s3_image(uri: str):
 @app.get("/_api/photo")
 def get_photo(name: str, bucket: str="face-image"):
     file_path = "s3://"+bucket+"/"+name
+    data_uri = image_to_data_uri(get_s3_image(file_path))
+    if len(data_uri) < 10:
+        raise HTTPException(status_code=404, detail="Photo " +
+                            name + " not found in bucket "+bucket+".")
     return {
         "image": image_to_data_uri(get_s3_image(file_path))
     }
