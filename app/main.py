@@ -40,5 +40,5 @@ def get_photo(name: str, bucket: str="face-image"):
     #     raise HTTPException(status_code=404, detail="Photo " +
     #                         name + " not found in bucket "+bucket+".")
     return {
-        "photo_data_uri": image_to_data_uri(get_s3_image(file_path))
+        "photo_data_uri": data_uri
     }
