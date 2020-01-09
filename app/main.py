@@ -47,8 +47,8 @@ def get_s3_image(uri: str):
 
 
 @app.get("/_api/photo")
-    def get_photo(name: str):
-        file_path = "s3://face-image/"+name
-        return {
-            "image": image_to_data_uri(get_s3_image(file_path))
-        }
+def get_photo(name: str):
+    file_path = "s3://face-image/"+name
+    return {
+        "image": image_to_data_uri(get_s3_image(file_path))
+    }

@@ -1,6 +1,6 @@
 FROM tiangolo/uvicorn-gunicorn:python3.7-alpine3.8
 
-LABEL maintainer="Rawit Panjaroen<check.rawit@gmail.com>"
+LABEL maintainer="Supakorn Wongsawang<supakorn.wo@ku.th>"
 
 RUN apk --no-cache add build-base \
                        jpeg-dev \
