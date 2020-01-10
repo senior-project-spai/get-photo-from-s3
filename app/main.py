@@ -35,14 +35,9 @@ def get_photo(name: str, bucket: str="face-image"):
     file_path = "s3://"+bucket+"/"+name
     try:
         data_uri = image_to_data_uri(get_s3_image(file_path))
-        # TODO: fix internal error to 404 not found when user download not existing photo
-
-        # if len(data_uri) < 10:
-        #     raise HTTPException(status_code=404, detail="Photo " +
-        #                         name + " not found in bucket "+bucket+".")
         return {
             "photo_data_uri": data_uri
         }
     except:
         raise HTTPException(status_code=404, detail="Photo " +
-                            name + " not found in bucket "+bucket+".")
+                            name + " not found in bucket "+bucket)
