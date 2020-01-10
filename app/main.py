@@ -10,9 +10,17 @@ from io import BytesIO
 # S3
 import s3
 
+# pydantic for Model
+from pydantic import BaseModel
 app = FastAPI()
 
 app.add_middleware(CORSMiddleware, allow_origins=['*'])
+
+
+class Iresponse_photo(BaseModel):
+    photo_data_uri: str
+    file_name: str
+    bucket_name: str
 
 
 def image_to_data_uri(img: Image.Image):
@@ -30,13 +38,15 @@ def get_s3_image(uri: str):
     return Image.open(img_stream)
 
 
-@app.get("/_api/photo")
+@app.get("/_api/photo", response_model=Iresponse_photo)
 def get_photo(name: str, bucket: str="face-image"):
     file_path = "s3://"+bucket+"/"+name
     try:
         data_uri = image_to_data_uri(get_s3_image(file_path))
         return {
-            "photo_data_uri": data_uri
+            "photo_data_uri": data_uri,
+            "file_name": name,
+            "bucket_name": bucket
         }
     except:
         raise HTTPException(status_code=404, detail="Photo " +
