@@ -51,3 +51,9 @@ def get_photo(name: str, bucket: str="face-image"):
     except:
         raise HTTPException(status_code=404, detail="Photo " +
                             name + " not found in bucket "+bucket)
+
+
+# For check with probe in openshift
+@app.get('/healthz')
+def health_check():
+    return
