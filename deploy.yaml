@@ -60,16 +60,17 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
 ---
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-    name: "get-photo-from-s3-service"
+    name: get-photo-from-s3-service
     labels:
-    app: "get-photo-from-s3"
+        app: get-photo-from-s3
 spec:
     ports:
-    - protocol: "TCP"
-    port: 80
+        -
+            protocol: TCP
+            port: 80
     selector:
-    app: "get-photo-from-s3"
-    type: "LoadBalancer"
+        app: get-photo-from-s3
+    type: LoadBalancer
