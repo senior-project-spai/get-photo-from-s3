@@ -63,7 +63,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: get-photo-from-s3-service
+    name: get-photo-from-s3
     labels:
         app: get-photo-from-s3
 spec:
